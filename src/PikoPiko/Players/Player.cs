@@ -11,7 +11,7 @@ namespace PikoPiko
         private List<Ration> rations;
         public bool HasRations => rations.Any();
         public bool HasVisibleRation(int number) => HasRations && VisibleRation.Value == number;
-        public Ration VisibleRation => rations.Any() ? rations.Last() : null;
+        public Ration VisibleRation => HasRations ? rations.Last() : null;
         public void AddRation(Ration ration) => rations.Add(ration);
         public Ration Remove()
         {
@@ -28,6 +28,9 @@ namespace PikoPiko
             id = Guid.NewGuid();
             rations = new List<Ration>();
         }
+
+        public int Worms() => HasRations ? rations.Sum(x => x.Worms) : 0;
+        public int MaxValue() => HasRations ? rations.Max(x => x.Value) : 0;
 
         public override string ToString() => $"Player {id.ToString()}";
 

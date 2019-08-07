@@ -24,5 +24,7 @@ namespace PikoPiko.Test
             Assert.False(canBeSaved);
             Assert.Throws<SavingResultException>(() => move.Save(firstResult));
         }
+
+     
     }
 }

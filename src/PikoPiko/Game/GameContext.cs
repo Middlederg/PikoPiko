@@ -1,4 +1,6 @@
-﻿namespace PikoPiko
+﻿using System.Collections.Generic;
+
+namespace PikoPiko
 {
     public class GameContext
     {
@@ -54,5 +56,28 @@
             }
             players.Next();
         }
+
+        public void LoseRation()
+        {
+            if (CurrentPlayer.HasRations)
+                MoveRationFromCurrentPlayerToGrill();
+
+            players.Next();
+        }
+
+        private void MoveRationFromCurrentPlayerToGrill()
+        {
+            var ration = players.RemoveVisibleRationFromCurrentPlayer();
+
+            if (grill.IsLowerThanHighestRation(ration))
+                grill.TurnDownHighestRation();
+
+            grill.InsertRation(ration);
+        }
+
+        public bool IsEndOfGame() => !grill.HasRations;        
+
+        public Player Winner() => players.Winner();
+        public IEnumerable<Player> Ranking() => players.Ranking();
     }
 }

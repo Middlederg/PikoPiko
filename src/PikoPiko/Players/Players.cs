@@ -30,6 +30,16 @@ namespace PikoPiko
             CurrentPlayer.AddRation(stolenRation);
         }
 
-        //public void AddRationToCurrentPlayer(Ration ration) => CurrentPlayer.AddRation(ration);
+        public Ration RemoveVisibleRationFromCurrentPlayer()
+        {
+            if (!CurrentPlayer.HasRations)
+                return null;
+
+            var ration = CurrentPlayer.Remove();
+            return ration;
+        }
+
+        public Player Winner() => Ranking().First();
+        public IEnumerable<Player> Ranking() => players.OrderByDescending(x => x.Worms()).ThenByDescending(x => x.MaxValue()).ToList();
     }
 }

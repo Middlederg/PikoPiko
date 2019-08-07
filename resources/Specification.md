@@ -43,3 +43,7 @@ Finaliza el juego cuando no quedan raciones en la parrilla.
 
 El ganador es el jugador con más gusanos en su parrilla.
 En caso de empate, gana el jugador con la ración de mayor valor.
+
+---
+
+Para probar los elementos que dependen del azar, habría que esconder la generación de aleatorios tras una interface

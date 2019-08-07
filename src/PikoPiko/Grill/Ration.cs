@@ -5,10 +5,15 @@
         public int Value { get; }
         public int Worms { get; }
 
+        private bool active;
+        public bool IsActive => active;
+        public void TurnDown() => active = false;
+
         public Ration(int value, int worms)
         {
             Value = value;
             Worms = worms;
+            active = true;
         }
 
         public string ImagePath => $"worms-{Worms}" ;

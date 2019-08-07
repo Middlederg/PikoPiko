@@ -44,5 +44,31 @@ namespace PikoPiko.Test
             Assert.Equal(ration3, player.VisibleRation);
             Assert.True(player.HasRations);
         }
+
+        [Fact]
+        public void Should_calculate_points()
+        {
+            var player = new Player();
+
+            player.AddRation(new Ration(21, 1));
+            player.AddRation(new Ration(30, 3));
+
+            Assert.True(player.HasRations);
+            Assert.Equal(4, player.Worms());
+            Assert.Equal(30, player.MaxValue());
+        }
+
+        [Fact]
+        public void Should_have_0_points()
+        {
+            var player = new Player();
+
+            player.AddRation(new Ration(21, 1));
+            player.Remove();
+
+            Assert.False(player.HasRations);
+            Assert.Equal(0, player.Worms());
+            Assert.Equal(0, player.MaxValue());
+        }
     }
 }

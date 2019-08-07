@@ -35,7 +35,6 @@ namespace PikoPiko.Test
 
             Assert.True(avaliableBefore);
             Assert.False(avaliableAfter);
-            Assert.DoesNotContain(ration, grill.Rations);
         }
 
         [Fact]
@@ -65,6 +64,31 @@ namespace PikoPiko.Test
 
             Assert.False(avaliable);
             Assert.Throws<RationNotFoundException>(() => grill.TakeRation(number));
+        }
+
+        [Fact]
+        public void Should_not_turn_down_highest_ration()
+        {
+            var grill = new Grill();
+            var ration36 = grill.TakeRation(36);
+
+            var isLower = grill.IsLowerThanHighestRation(ration36);
+
+            Assert.False(isLower);
+        }
+
+        [Fact]
+        public void Should_turn_down_highest_ration()
+        {
+            var grill = new Grill();
+            var ration35 = grill.TakeRation(35);
+
+            var isLower = grill.IsLowerThanHighestRation(ration35);
+            grill.TurnDownHighestRation();
+            var isAvaliable = grill.IsAvaliable(36);
+
+            Assert.True(isLower);
+            Assert.False(isAvaliable);
         }
     }
 }

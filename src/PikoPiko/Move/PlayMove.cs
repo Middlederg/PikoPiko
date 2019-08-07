@@ -6,6 +6,14 @@ namespace PikoPiko
     public class PlayMove
     {
         private List<IResult> savedResults;
+        public int Points()
+        {
+            if (!savedResults.Any() || !savedResults.Contains(ResultFactory.Worm))
+                return 0;
+
+            return savedResults.Sum(x => x.Value);
+        }
+
         public DiceRoll CurrentRoll { get; private set; }
 
         public PlayMove()

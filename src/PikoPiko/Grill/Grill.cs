@@ -1,15 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PikoPiko
 {
     public class Grill
     {
-        public List<Ration> Rations { get; }
+        private List<Ration> rations;
+        protected List<Ration> Rations => rations.Where(x => x.IsActive).ToList();
+        public bool HasRations => Rations.Any(x => x.IsActive);
+        private Ration HighestRation
+        {
+            get
+            {
+                if (!rations.Any())
+                    return null;
+
+                var maxValue = Rations.Max(x => x.Value);
+                return Rations.Single(x => x.Value == maxValue);
+            }
+        }
 
         public Grill()
         {
-            Rations = RationFactory.GetRations().ToList();
+            rations = RationFactory.GetRations().ToList();
         }
 
         public bool IsAvaliable(int number)
@@ -23,7 +37,7 @@ namespace PikoPiko
                 throw new RationNotFoundException(number);
 
             var ration = Rations.Single(x => x.Value == number);
-            Rations.Remove(ration);
+            rations.Remove(ration);
             return ration;
         }
 
@@ -39,8 +53,28 @@ namespace PikoPiko
 
             var maxValue = Rations.Where(x => x.Value < number).Max(x => x.Value);
             var ration = Rations.Single(x => x.Value == maxValue);
-            Rations.Remove(ration);
+            rations.Remove(ration);
             return ration;
+        }
+
+        public bool IsLowerThanHighestRation(Ration ration)
+        {
+            if (!HasRations)
+                return false;
+            return ration.Value < HighestRation.Value;
+        }
+
+        internal void InsertRation(Ration ration)
+        {
+            rations.Insert(0, ration);
+        }
+
+        public void TurnDownHighestRation()
+        {
+            if (!HasRations)
+                throw new RationNotFoundException();
+
+            HighestRation.TurnDown();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace PikoPiko
         private static Random r = new Random();
         public static IResult GetRandomResult() => GetResult(r.Next(1, 7));
         public static int GetRandomNumber(int until) => r.Next(0, until + 1);
+        public static int GetRandomNumber(int from, int until) => r.Next(from, until + 1);
         public static IResult GetResult(int number)
         {
             switch (number)
