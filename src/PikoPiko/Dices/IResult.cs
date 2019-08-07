@@ -1,4 +1,6 @@
-﻿namespace PikoPiko
+﻿using System.Linq;
+
+namespace PikoPiko
 {
     public interface IResult : IPath
     {

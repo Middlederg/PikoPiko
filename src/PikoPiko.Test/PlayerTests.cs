@@ -1,0 +1,48 @@
+﻿using Xunit;
+
+namespace PikoPiko.Test
+{
+    public class PlayerTests
+    {
+        [Fact]
+        public void Should_not_have_rations_when_created()
+        {
+            var player = new Player();
+
+            Assert.False(player.HasRations);
+            Assert.Null(player.VisibleRation);
+        }
+
+        [Fact]
+        public void Last_got_ration_is_visible()
+        {
+            var player = new Player();
+            var ration = new Ration(2, 2);
+
+            player.AddRation(new Ration(1, 1));
+            player.AddRation(ration);
+
+            Assert.True(player.HasRations);
+            Assert.Equal(ration, player.VisibleRation);
+        }
+
+        [Fact]
+        public void Should_remove_last_ration()
+        {
+            var player = new Player();
+            var ration1 = new Ration(1, 1);
+            var ration2 = new Ration(2, 1);
+            var ration3 = new Ration(3, 1);
+            var ration4 = new Ration(4, 1);
+
+            player.AddRation(ration1);
+            player.AddRation(ration2);
+            player.AddRation(ration3);
+            player.AddRation(ration4);
+            player.Remove();
+
+            Assert.Equal(ration3, player.VisibleRation);
+            Assert.True(player.HasRations);
+        }
+    }
+}
