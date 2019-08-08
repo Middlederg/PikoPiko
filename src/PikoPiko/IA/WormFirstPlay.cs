@@ -9,13 +9,7 @@
             if (move.CanSave(ResultFactory.Worm) && move.CurrentRoll.Has(ResultFactory.Worm))
                 return ResultFactory.Worm;
 
-            IResult result;
-            do
-            {
-                result = ResultFactory.Any;
-            }
-            while (!move.CanSave(result) || !move.CurrentRoll.Has(result));
-            return result;
+            return Highest();
         }
     }
 }

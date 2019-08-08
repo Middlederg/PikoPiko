@@ -14,12 +14,18 @@ namespace PikoPiko
             results = Enumerable.Range(0, diceCount).Select(x => ResultFactory.Any).ToList();
         }
 
-        public IEnumerable<IResult> GetResults(IResult resultType) => results.Where(x => x.Equals(resultType));
-        public IEnumerable<IResult> GetAllResults() => results.Distinct().OrderBy(x => x.IsWorm).ThenBy(x => x.Value).ToList();
+        public int WormCount => results.Count(result => result.IsWorm);
+        public IEnumerable<IResult> GetResults(IResult resultType) => results.Where(result => result.Equals(resultType));
+
+        public IEnumerable<IResult> GetAllResults() => results
+            .Distinct()
+            .OrderBy(result => result.IsWorm)
+            .ThenBy(result => result.Value)
+            .ToList();
 
         public RollEntry Higest()
         {
-            var entries = RollEntries().ToList();
+            var entries = RollEntries();
 
             if (!entries.Any())
                 return null;
@@ -28,7 +34,7 @@ namespace PikoPiko
             return entries.First(x => x.Points() == points);
         }
 
-        private IEnumerable<RollEntry> RollEntries() => results.ToRollEntries();
+        private IEnumerable<RollEntry> RollEntries() => results.ToRollEntries().ToList();
         
     }
 }

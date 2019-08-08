@@ -29,7 +29,6 @@ namespace PikoPiko.Test
 
             savedResults.AddResults(new List<IResult>() { worm });
 
-            Assert.Equal(worm.ToString(),savedResults.ToString());
             Assert.Equal(WormResult.WormDefaultValue, savedResults.Points);
         }
     }

@@ -6,13 +6,7 @@
 
         protected override IResult Strategy()
         {
-            IResult result;
-            do
-            {
-                result = ResultFactory.Any;
-            }
-            while (!move.CanSave(result) || !move.CurrentRoll.Has(result));
-            return result;
+            return Highest();
         }
     }
 }

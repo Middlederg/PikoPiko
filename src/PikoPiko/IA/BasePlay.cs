@@ -1,4 +1,6 @@
-﻿namespace PikoPiko
+﻿using System.Linq;
+
+namespace PikoPiko
 {
     public abstract class BasePlay
     {
@@ -25,5 +27,16 @@
         }
 
         protected abstract IResult Strategy();
+
+        protected IResult Best() => move.BestOption();
+        protected IResult Highest()
+        {
+            foreach (var result in ResultFactory.AllResults.OrderByDescending(x=> x.Value))
+            {
+                if (move.CanSave(result) && move.CurrentRoll.Has(result))
+                    return result;
+            }
+            return null;
+        }
     }
 }

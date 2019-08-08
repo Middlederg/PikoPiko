@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PikoPiko
 {
@@ -37,6 +38,16 @@ namespace PikoPiko
         public void Roll()
         {
             CurrentRoll = new DiceRoll(savedResults.DicesRemaining);
+        }
+
+        public IResult BestOption()
+        {
+            return CurrentRoll.GetAllResults()
+                .Where(result => savedResults.CanBeSaved(result))
+                .ToRollEntries()
+                .OrderByDescending(x => x.Points())
+                .Select(x => x.Result)
+                .FirstOrDefault();
         }
 
         public bool IsFailure(int objetive) => Points < objetive;
