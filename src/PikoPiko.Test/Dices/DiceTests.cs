@@ -26,7 +26,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Can_generate_dice_result()
         {
-            var result = ResultFactory.GetRandomResult();
+            var result = ResultFactory.Any;
 
             Assert.IsAssignableFrom<IResult>(result);
         }

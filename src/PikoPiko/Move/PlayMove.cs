@@ -1,40 +1,46 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PikoPiko
 {
     public class PlayMove
     {
-        private List<IResult> savedResults;
-        public int Points()
-        {
-            if (!savedResults.Any() || !savedResults.Contains(ResultFactory.Worm))
-                return 0;
-
-            return savedResults.Sum(x => x.Value);
-        }
-
+        private SavedResults savedResults;
         public DiceRoll CurrentRoll { get; private set; }
+        public int Points
+        {
+            get
+            {
+                if (!CanKeepRolling())
+                    return 0;
+
+                return savedResults.Points;
+            }
+        }
 
         public PlayMove()
         {
-            savedResults = new List<IResult>();
+            savedResults = new SavedResults();
             CurrentRoll = new DiceRoll();
         }
 
-        public bool CanSave(IResult result) => !savedResults.Any(x => x.Equals(result));
+        public bool CanSave(IResult result) => savedResults.CanBeSaved(result);
 
         public void Save(IResult result)
         {
             if (!CanSave(result))
                 throw new SavingResultException(result, savedResults);
 
-            savedResults.AddRange(CurrentRoll.GetResults(result));
+            var results = CurrentRoll.GetResults(result).ToList();
+            savedResults.AddResults(results);
         }
 
         public void Roll()
         {
-            CurrentRoll = new DiceRoll(DiceRoll.StartingDiceCount - savedResults.Count);
+            CurrentRoll = new DiceRoll(savedResults.DicesRemaining);
         }
+
+        public bool IsFailure(int objetive) => Points < objetive;
+
+        public bool CanKeepRolling() => CurrentRoll.GetAllResults().Any(result => savedResults.CanBeSaved(result));
     }
 }

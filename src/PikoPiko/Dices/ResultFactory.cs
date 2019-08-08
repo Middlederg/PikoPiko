@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PikoPiko
 {
     public static class ResultFactory
     {
         private static Random r = new Random();
-        public static IResult GetRandomResult() => GetResult(r.Next(1, 7));
+        public static IResult Any => GetResult(r.Next(1, 7));
         public static int GetRandomNumber(int until) => r.Next(0, until + 1);
         public static int GetRandomNumber(int from, int until) => r.Next(from, until + 1);
+        public static IEnumerable<IResult> AllResults => new List<IResult>() { One, Two, Three, Four, Five, Worm };
         public static IResult GetResult(int number)
         {
             switch (number)
