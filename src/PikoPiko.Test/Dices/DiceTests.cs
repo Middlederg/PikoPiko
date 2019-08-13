@@ -32,11 +32,11 @@ namespace PikoPiko.Test
         }
 
         [Theory]
-        [InlineData(1, "result-1")]
-        [InlineData(2, "result-2")]
-        [InlineData(3, "result-3")]
-        [InlineData(4, "result-4")]
-        [InlineData(5, "result-5")]
+        [InlineData(1, "result_1")]
+        [InlineData(2, "result_2")]
+        [InlineData(3, "result_3")]
+        [InlineData(4, "result_4")]
+        [InlineData(5, "result_5")]
         [InlineData(6, "worm")]
         public void Should_give_correct_image(int number, string imagePath)
         {

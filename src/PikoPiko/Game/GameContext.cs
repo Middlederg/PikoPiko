@@ -4,8 +4,8 @@ namespace PikoPiko
 {
     public class GameContext
     {
-        private Grill grill;
-        private Players players;
+        private readonly Grill grill;
+        private readonly Players players;
         public Player CurrentPlayer => players.CurrentPlayer;
         
         public GameContext(int playerCount)

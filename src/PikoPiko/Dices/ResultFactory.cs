@@ -5,7 +5,7 @@ namespace PikoPiko
 {
     public static class ResultFactory
     {
-        private static Random r = new Random();
+        private static readonly Random r = new Random();
         public static IResult Any => GetResult(r.Next(1, 7));
         public static int GetRandomNumber(int until) => r.Next(0, until + 1);
         public static int GetRandomNumber(int from, int until) => r.Next(from, until + 1);

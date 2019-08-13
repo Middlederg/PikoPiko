@@ -55,7 +55,7 @@ namespace PikoPiko.Test
 
         private class ReportEntry
         {
-            private List<int> result;
+            private readonly List<int> result;
             public void AddResult(int points) => result.Add(points);
             public int Average
             {

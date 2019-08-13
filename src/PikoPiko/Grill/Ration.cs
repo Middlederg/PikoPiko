@@ -16,7 +16,7 @@
             active = true;
         }
 
-        public string ImagePath => $"worms-{Worms}" ;
+        public string ImagePath => $"worms_{Worms}" ;
 
         public override string ToString() => $"{Value} ({Worms} worm{(Worms != 1 ? "s" : "")})";
 

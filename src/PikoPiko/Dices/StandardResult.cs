@@ -4,7 +4,7 @@
     {
         public abstract int Value { get; }
         public bool IsWorm => false;
-        public string ImagePath => $"result-{Value}";
+        public string ImagePath => $"result_{Value}";
 
         public override string ToString() => Value.ToString();
 
