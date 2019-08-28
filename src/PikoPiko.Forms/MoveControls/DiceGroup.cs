@@ -12,7 +12,8 @@ namespace PikoPiko.Forms
 {
     public partial class DiceGroup : BaseUserControl
     {
-        public event EventHandler OnDiceGroupSelected;
+        public event EventHandler OnDiceClicked;
+        public event EventHandler OnStartClicked;
 
         public void SetResults(IEnumerable<IResult> value)
         {
@@ -29,12 +30,12 @@ namespace PikoPiko.Forms
 
         private void DiceClicked(object sender, EventArgs e)
         {
-            Disable();
+            DisableAll();
             Enable(sender as Dice);
-            OnDiceGroupSelected?.Invoke(sender, EventArgs.Empty);
+            OnDiceClicked?.Invoke(sender, EventArgs.Empty);
         }
 
-        private void Disable()
+        private void DisableAll()
         {
             foreach (var dice in MainPanel.Controls.OfType<Dice>())
                 dice.Disable();
@@ -42,7 +43,7 @@ namespace PikoPiko.Forms
 
         private void Enable(Dice dice)
         {
-            foreach (var selectedDice in MainPanel.Controls.OfType<Dice>().Where(x => x.Equals(dice)))
+            foreach (var selectedDice in MainPanel.Controls.OfType<Dice>().Where(x => x.Result.Equals(dice.Result)))
                 selectedDice.Activate();
         }
 
@@ -55,6 +56,11 @@ namespace PikoPiko.Forms
         {
             foreach (var dice in MainPanel.Controls.OfType<Dice>())
                 dice.Roll();
+        }
+
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            OnStartClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

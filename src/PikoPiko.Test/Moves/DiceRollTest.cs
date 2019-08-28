@@ -10,7 +10,7 @@ namespace PikoPiko.Test
         {
             var roll = new DiceRoll();
 
-            var results = roll.GetResults(ResultFactory.Worm);
+            var results = roll.GetResultsOfType(ResultFactory.Worm);
 
             Assert.True(results.Count() >= 0);
             Assert.True(results.Count() <= DiceRoll.StartingDiceCount);
@@ -21,11 +21,11 @@ namespace PikoPiko.Test
         {
             var roll = new DiceRoll();
 
-            var results = roll.GetAllResults();
+            var results = roll.GetAllDisctinctResults();
 
             foreach (var result in results)
             {
-                var part = roll.GetResults(result).ToList();
+                var part = roll.GetResultsOfType(result).ToList();
                 Assert.True(part.Any());
             }
         }
@@ -35,7 +35,7 @@ namespace PikoPiko.Test
         {
             var roll = new DiceRoll();
 
-            var results = roll.GetAllResults();
+            var results = roll.GetAllDisctinctResults();
 
             foreach (var result in results)
             {

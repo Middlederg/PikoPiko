@@ -7,7 +7,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_not_have_rations_when_created()
         {
-            var player = new Player();
+            var player = new Player("Ronaldo");
 
             Assert.False(player.HasRations);
             Assert.Null(player.VisibleRation);
@@ -16,7 +16,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Last_got_ration_is_visible()
         {
-            var player = new Player();
+            var player = new Player("Tomás");
             var ration = new Ration(2, 2);
 
             player.AddRation(new Ration(1, 1));
@@ -29,7 +29,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_remove_last_ration()
         {
-            var player = new Player();
+            var player = new Player("Miguel");
             var ration1 = new Ration(1, 1);
             var ration2 = new Ration(2, 1);
             var ration3 = new Ration(3, 1);
@@ -48,7 +48,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_calculate_points()
         {
-            var player = new Player();
+            var player = new Player("Belén");
 
             player.AddRation(new Ration(21, 1));
             player.AddRation(new Ration(30, 3));
@@ -61,7 +61,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_have_0_points()
         {
-            var player = new Player();
+            var player = new Player("Ana");
 
             player.AddRation(new Ration(21, 1));
             player.Remove();

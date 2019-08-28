@@ -16,7 +16,13 @@ namespace PikoPiko.Forms
         {
             InitializeComponent();
 
-     
+            //move1.Minimun = 21;
+            //move1.Prepare();
+
+            //rationTile1.RationValue = new Ration(25, 2);
+            //rationTile1.Activable = true;
+
+            //rationPanel1.SetRations(RationFactory.GetRations());
         }
     }
 }

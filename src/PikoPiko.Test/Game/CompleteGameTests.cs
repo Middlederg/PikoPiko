@@ -25,7 +25,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_play_until_end()
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
 
             PlayGameTakingOnlyRations(game);
 

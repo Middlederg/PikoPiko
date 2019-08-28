@@ -32,7 +32,7 @@
             // 
             // CustomButton
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(130)))), ((int)(((byte)(76)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(145)))), ((int)(((byte)(182)))));
             this.FlatAppearance.BorderSize = 0;
             this.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Bold);

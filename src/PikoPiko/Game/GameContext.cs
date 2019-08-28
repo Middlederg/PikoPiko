@@ -1,28 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PikoPiko
 {
     public class GameContext
     {
-        private readonly Grill grill;
-        private readonly Players players;
-        public Player CurrentPlayer => players.CurrentPlayer;
-        
-        public GameContext(int playerCount)
+        public Grill Grill { get; }
+        public Players Players { get; }
+        public Player CurrentPlayer => Players.CurrentPlayer;
+
+        public int MinimunObjetive
         {
-            grill = new Grill();
-            players = new Players(playerCount);            
+            get
+            {
+                var grillMinValue = RationFactory.RationCount + RationFactory.RationFirstValue + 1;
+                var playersMinValue = grillMinValue;
+
+                if (Grill.HasRations)
+                    grillMinValue = Grill.GetRations().Min(x => x.Value);
+
+                var visibleRations = Players.Others
+                    .Where(x => x.HasRations)
+                    .Select(x => x.VisibleRation);
+                if (visibleRations.Any())
+                    playersMinValue =  visibleRations.Min(x => x.Value);
+
+                return Math.Min(grillMinValue, playersMinValue);
+            }
         }
+
+        public GameContext(IEnumerable<string> names)
+        {
+            Grill = new Grill();
+            Players = new Players(names.Select(name => new Player(name)));            
+        }
+
+        public GameContext(params string[] names) : this(names.ToList()) { }
 
         public bool IsSuccess(int number)
         {
-            if (grill.IsAvaliable(number))
+            if (Grill.IsAvaliable(number))
                 return true;
 
-            if (players.OtherPlayerHasVisibleRation(number))
+            if (Players.OtherPlayerHasVisibleRation(number))
                 return true;
 
-            if (grill.IsAvaliableBelow(number))
+            if (Grill.IsAvaliableBelow(number))
                 return true;
 
             return false;
@@ -30,22 +54,22 @@ namespace PikoPiko
 
         public void TakeRation(int number)
         {
-            if (grill.IsAvaliable(number))
+            if (Grill.IsAvaliable(number))
             {
-                var ration = grill.TakeRation(number);
-                players.CurrentPlayer.AddRation(ration);
+                var ration = Grill.TakeRation(number);
+                Players.CurrentPlayer.AddRation(ration);
             }
             else
             {
-                if (players.OtherPlayerHasVisibleRation(number))
+                if (Players.OtherPlayerHasVisibleRation(number))
                 {
-                    players.RemoveRationFromOtherPlayer(number);
+                    Players.RemoveRationFromOtherPlayer(number);
                 }
                 else
                 {
-                    if (grill.IsAvaliableBelow(number))
+                    if (Grill.IsAvaliableBelow(number))
                     {
-                        var ration = grill.TakeRationBelow(number);
+                        var ration = Grill.TakeRationBelow(number);
                         CurrentPlayer.AddRation(ration);
                     }
                     else
@@ -54,7 +78,7 @@ namespace PikoPiko
                     }
                 }
             }
-            players.Next();
+            Players.Next();
         }
 
         public void LoseRation()
@@ -62,22 +86,22 @@ namespace PikoPiko
             if (CurrentPlayer.HasRations)
                 MoveRationFromCurrentPlayerToGrill();
 
-            players.Next();
+            Players.Next();
         }
 
         private void MoveRationFromCurrentPlayerToGrill()
         {
-            var ration = players.RemoveVisibleRationFromCurrentPlayer();
+            var ration = Players.RemoveVisibleRationFromCurrentPlayer();
 
-            if (grill.IsLowerThanHighestRation(ration))
-                grill.TurnDownHighestRation();
+            if (Grill.IsLowerThanHighestRation(ration))
+                Grill.TurnDownHighestRation();
 
-            grill.InsertRation(ration);
+            Grill.InsertRation(ration);
         }
 
-        public bool IsEndOfGame() => !grill.HasRations;        
+        public bool IsEndOfGame() => !Grill.HasRations;        
 
-        public Player Winner() => players.Winner();
-        public IEnumerable<Player> Ranking() => players.Ranking();
+        public Player Winner() => Players.Winner();
+        public IEnumerable<Player> Ranking() => Players.Ranking();
     }
 }

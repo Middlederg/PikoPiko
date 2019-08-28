@@ -9,7 +9,7 @@ namespace PikoPiko.Test
         public void Can_not_Save_previously_saved_results()
         {
             var move = new PlayMove();
-            var firstResult = move.CurrentRoll.GetAllResults().First();
+            var firstResult = move.CurrentRoll.GetAllDisctinctResults().First();
 
             move.Save(firstResult);
 

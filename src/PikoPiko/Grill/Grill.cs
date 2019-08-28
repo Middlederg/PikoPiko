@@ -8,12 +8,14 @@ namespace PikoPiko
     {
         private List<Ration> rations;
         protected List<Ration> Rations => rations.Where(x => x.IsActive).ToList();
+        public IEnumerable<Ration> GetRations() => Rations.OrderBy(x => x.Value);
+        
         public bool HasRations => Rations.Any(x => x.IsActive);
         private Ration HighestRation
         {
             get
             {
-                if (!rations.Any())
+                if (!Rations.Any())
                     return null;
 
                 var maxValue = Rations.Max(x => x.Value);

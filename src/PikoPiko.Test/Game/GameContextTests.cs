@@ -12,7 +12,7 @@ namespace PikoPiko.Test
         [InlineData(22)]
         public void Should_be_failed_turn(int number)
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(30);
             game.TakeRation(22);
@@ -30,7 +30,7 @@ namespace PikoPiko.Test
         [InlineData(29)]
         public void Should_be_succesfull_turn(int number)
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(30);
             game.TakeRation(22);
@@ -46,7 +46,7 @@ namespace PikoPiko.Test
         [InlineData(33)]
         public void Should_obtain_30_ration(int number)
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(31);
             game.TakeRation(22);
@@ -65,7 +65,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_have_no_rations()
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(30);
             game.TakeRation(22);
@@ -78,7 +78,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_lose_last_ration()
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(30);
             game.TakeRation(22);
@@ -92,7 +92,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_remove_ration_on_failing()
         {
-            var game = new GameContext(2);
+            var game = ObjectFactory.TwoPlayerGame;
             game.TakeRation(21);
             game.TakeRation(30);
 

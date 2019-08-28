@@ -51,7 +51,7 @@ namespace PikoPiko.Test
         [InlineData(3, "3")]
         [InlineData(4, "4")]
         [InlineData(5, "5")]
-        [InlineData(6, "Worm (5)")]
+        [InlineData(6, "Worm")]
         public void Should_give_correct_dice_name(int number, string name)
         {
             var result = ResultFactory.GetResult(number);

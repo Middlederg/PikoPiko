@@ -10,7 +10,7 @@ namespace PikoPiko
         public bool IsWorm => true;
         public string ImagePath => "worm";
 
-        public override string ToString() => $"Worm ({Value})";
+        public override string ToString() => $"Worm";
 
         public override bool Equals(object obj)
         {

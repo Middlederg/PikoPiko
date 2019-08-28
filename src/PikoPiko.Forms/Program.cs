@@ -16,7 +16,7 @@ namespace PikoPiko.Forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BaseForm());
+            Application.Run(new GameView(new GameContext("Maider", "Jorge")));
         }
 
        

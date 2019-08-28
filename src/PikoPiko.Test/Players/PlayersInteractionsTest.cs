@@ -8,7 +8,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_find_other_players_ration()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(new Ration(22, 1));
             players.Next();
@@ -21,7 +21,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_not_find_other_players_ration()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(new Ration(22, 1));
             players.Next();
@@ -34,7 +34,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_remove_ration_form_other_player()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
             var ration = new Ration(22, 1);
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(ration);
@@ -48,7 +48,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_throw_exception_removing_hidden_ration()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
             var ration = new Ration(22, 1);
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(ration);
@@ -60,7 +60,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_find_a_winner()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
 
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(new Ration(22, 1));
@@ -74,7 +74,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_find_a_winner_when_it_is_a_tie()
         {
-            var players = new Players(2);
+            var players = ObjectFactory.AnyTwoPlayers;
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(new Ration(22, 1));
             players.Next();
@@ -87,7 +87,7 @@ namespace PikoPiko.Test
         [Fact]
         public void Should_get_the_ranking_ordered()
         {
-            var players = new Players(3);
+            var players = ObjectFactory.AnyThreePlayers;
             players.CurrentPlayer.AddRation(new Ration(21, 1));
             players.CurrentPlayer.AddRation(new Ration(22, 1));
             var third = players.CurrentPlayer;
