@@ -16,9 +16,10 @@ namespace PikoPiko.Forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameView(new GameContext("Maider", "Jorge")));
-        }
+            //Application.Run(new GameView(new GameContext("Maider", "Jorge", "Roberto", "Sara", "David", "Iratxe")));
 
-       
+            //Application.Run(new WinnerView(new GameContext("Maider", "Jorge", "Roberto", "Sara", "David", "Iratxe")));
+            Application.Run(new MainMenu());
+        }
     }
 }

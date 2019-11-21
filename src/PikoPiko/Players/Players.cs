@@ -50,6 +50,9 @@ namespace PikoPiko
         }
 
         public Player Winner() => Ranking().First();
-        public IEnumerable<Player> Ranking() => PlayerList.OrderByDescending(x => x.Worms()).ThenByDescending(x => x.MaxValue()).ToList();
+        public IEnumerable<Player> Ranking() => PlayerList
+            .OrderByDescending(x => x.Worms())
+            .ThenByDescending(x => x.MaxValue())
+            .ToList();
     }
 }

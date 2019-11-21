@@ -106,5 +106,18 @@ namespace PikoPiko.Test
 
             Assert.Equal(new Ration(21, 1), game.CurrentPlayer.VisibleRation);
         }
+
+
+        [Fact]
+        public void Should_be_succesfull_after_several_turns()
+        {
+            var game = ObjectFactory.TwoPlayerGame;
+            game.TakeRation(24);
+            game.TakeRation(30);
+            game.TakeRation(22);
+            game.TakeRation(31);
+
+            Assert.True(game.IsSuccess(21));
+        }
     }
 }

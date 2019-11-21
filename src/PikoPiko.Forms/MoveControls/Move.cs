@@ -37,6 +37,8 @@ namespace PikoPiko.Forms
             Lvw.Items.Clear();
         }
 
+        public void End() => MainTable.Controls[0].Enabled = false;
+
         public void StartMove(object sender, EventArgs e)
         {
             move = new PlayMove();

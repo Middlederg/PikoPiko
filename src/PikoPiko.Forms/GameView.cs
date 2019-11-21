@@ -21,6 +21,7 @@ namespace PikoPiko.Forms
         {
             InitializeComponent();
             this.game = game;
+            Icon = new IconImage().GetIcon();
 
             foreach (var player in game.Players.PlayerList)
             {
@@ -46,7 +47,14 @@ namespace PikoPiko.Forms
             UpdateGameStatus();
 
             if (game.IsEndOfGame())
-                MessageBox.Show($"Fin del juego: {game.Winner().ToString()}");
+            {
+                using (var winnerView = new WinnerView(game))
+                {
+                    winnerView.ShowDialog();
+                }
+                CurrentMove.End();
+                Close();
+            }
         }
 
         private void UpdateGameStatus()

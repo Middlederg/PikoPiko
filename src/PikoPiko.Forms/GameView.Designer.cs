@@ -46,10 +46,10 @@
             this.MainTable.RowCount = 2;
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTable.Size = new System.Drawing.Size(1250, 800);
+            this.MainTable.Size = new System.Drawing.Size(1250, 1100);
             this.MainTable.TabIndex = 0;
             // 
-            // rationPanel1
+            // Grill
             // 
             this.Grill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(241)))), ((int)(((byte)(230)))));
             this.Grill.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -57,7 +57,7 @@
             this.Grill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(50)))), ((int)(((byte)(67)))));
             this.Grill.Location = new System.Drawing.Point(20, 20);
             this.Grill.Margin = new System.Windows.Forms.Padding(20);
-            this.Grill.Name = "rationPanel1";
+            this.Grill.Name = "Grill";
             this.Grill.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.Grill.Size = new System.Drawing.Size(1210, 160);
             this.Grill.TabIndex = 0;
@@ -68,14 +68,14 @@
             this.PlayersPanel.Location = new System.Drawing.Point(0, 200);
             this.PlayersPanel.Margin = new System.Windows.Forms.Padding(0);
             this.PlayersPanel.Name = "PlayersPanel";
-            this.PlayersPanel.Size = new System.Drawing.Size(1250, 600);
+            this.PlayersPanel.Size = new System.Drawing.Size(1250, 900);
             this.PlayersPanel.TabIndex = 1;
             // 
             // GameView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 800);
+            this.ClientSize = new System.Drawing.Size(1250, 1100);
             this.Controls.Add(this.MainTable);
             this.Name = "GameView";
             this.Text = "GameView";
